@@ -4,19 +4,8 @@ import { trump, shuffledCards, handJudge, paper } from './utils/index'
 import './App.css';
 
 function App() {
-  // const [pile, setPile] = useState<Card[]>(shuffledCards(trump, 9))
+  const [pile, setPile] = useState<Card[]>(shuffledCards(trump, 9))
   const [judge, setJudge] = useState<Judge>()
-  const [pile, setPile] = useState<Card[]>([
-    {suit:"s", number:8},
-    {suit:"c", number:3},
-    {suit:"d", number:10},
-    {suit:"c", number:5},
-    {suit:"h", number:12},
-    {suit:"d", number:12},
-    {suit:"s", number:10},
-    {suit:"h", number:8},
-    {suit:"h", number:2}
-  ])
   const keys = ["10","11","12","13","14","s","c","h","d"];
   const reps = ["T","J","Q","K","A","♠︎","♣︎","❤︎","♦︎"];
 
@@ -90,13 +79,6 @@ function App() {
         break; 
     }
   }
-
-  // useEffect(() => {
-  //   const cards = async() => {
-  //     const cards = await shuffledCards(trump, 9)
-  //     setPile(shuffledCards(trump, 9))
-  //   }()
-  // },[pile])
 
   return (
     <div className="App">
