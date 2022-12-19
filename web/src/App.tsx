@@ -1,84 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, Game, Judge } from './types'
-import { trump, shuffledCards, handJudge, paper } from './utils/index' 
+import { trump, shuffledCards, handleGame, displayCard, handJudge, paper } from './utils/index' 
 import './App.css';
 
 function App() {
   const [pile, setPile] = useState<Card[]>(shuffledCards(trump, 9))
   const [judge, setJudge] = useState<Judge>()
-  const keys = ["10","11","12","13","14","s","c","h","d"];
-  const reps = ["T","J","Q","K","A","♠︎","♣︎","❤︎","♦︎"];
-
-  const displayCard = (cards:Card[]):string => {
-    let stringCards=""
-    cards.forEach((card:Card)=>{
-      stringCards += `[${card.suit+card.number}]`
-      for (let i=0;i<keys.length;i++) {
-        stringCards = stringCards.replace(keys[i], reps[i]);
-      }
-    })
-    return stringCards
-  }
-
   const [game, setGame] = useState<Game>({
     board: "",
     round: "preFlop"
   })
 
-  const flop = () => {
-    setGame({
-      board: displayCard(pile.slice(4,7)),
-      round: "flop"
-    })
-  }
-
-  const turn = () => {
-    setGame({
-      board: game.board+displayCard(pile.slice(7, 8)),
-      round: "turn"
-    })
-  }
-
-  const river = () => {
-    setGame({
-      board: game.board+displayCard(pile.slice(8,9)),
-      round: "river"
-    })
-  }
-
-  const showdown = () => {
-    setGame(game => ({...game, round: "showdown"}))
+  useEffect(() => {
     setJudge(handJudge(pile.slice(0,2),pile.slice(2,4),pile.slice(4,9)))
-    paper(displayCard(pile.slice(2,4)))
-  }
+  }, [pile])
 
-  const preflop = () => {
-    setGame({
-      board: "",
-      round: "preFlop"
-    })
-    setPile(shuffledCards(trump, 9))
-  }
-
-  const handleClick = (round:string) => {
-    switch (round) {
-      case "preFlop":
-        flop()
-        break;
-      case "flop":
-        turn()
-        break;
-      case "turn":
-        river()
-        break;
-      case "river":
-        showdown()
-        break; 
-      case "showdown":
-        preflop()
-        break; 
-    }
-  }
 
   return (
     <div className="App">
@@ -96,7 +32,7 @@ function App() {
         <p>
           Board {game.board}
         </p>
-        <button onClick={()=>handleClick(game.round)}>
+        <button onClick={()=>handleGame({game, setGame, pile, setPile})}>
           open
         </button>
         {game.round==="showdown"?

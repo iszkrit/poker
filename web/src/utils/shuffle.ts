@@ -14,16 +14,13 @@ const randomArray = ():number[] => {
     return arr
 }
 
-const shuffledCards = (trump:Card[], number:number):Card[] =>  {
+export const shuffledCards = (trump:Card[], number:number) : Card[] =>  {
     const arr = randomArray()
     const cut = arr.slice(0, number)
     
-    var pile = []
-    for (var i=0; i<number; i++) {
-        pile.push(trump[cut[i]])
-    }
+    const pile = (cut.map((n) => {
+        return trump[n]
+    }))
 
     return pile
 } 
-
-export default shuffledCards

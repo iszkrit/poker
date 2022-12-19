@@ -1,7 +1,7 @@
 import { Card, HandRank, Judge } from '../types'
 import { rank } from './index' 
 
-const handJudge = (player:Card[], opponent:Card[], board:Card[]):Judge => {
+export const handJudge = (player:Card[], opponent:Card[], board:Card[]):Judge => {
     const hr1:HandRank = rank(player, board)
     const hr2:HandRank = rank(opponent, board)
     
@@ -47,5 +47,3 @@ const handJudge = (player:Card[], opponent:Card[], board:Card[]):Judge => {
     }
     return judge
 }
-
-export default handJudge

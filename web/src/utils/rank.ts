@@ -1,18 +1,17 @@
 import { Card, HandRank } from '../types'
 
-const rank = (hand:Card[], board:Card[]):HandRank => {
-      
-    const nums = (cards:Card[]) => {
+export const rank = (hand:Card[], board:Card[]):HandRank => {
+    const sortNums = (cards:Card[]) => {
         const nums:number[] = []
         cards.forEach((card)=>{
             nums.push(card.number)
         })
-        const sortedNums = nums.sort((a, b) => a - b)
-        return sortedNums
+        const sortNums = nums.sort((a, b) => a - b)
+        return sortNums
     }
 
-    const allCards = hand.concat(board)  
-    const n = nums(allCards)
+    const allCards = [...hand, ...board]
+    const n = sortNums(allCards)
     
     const handRank : HandRank = {
         StraightFlush : {
@@ -198,5 +197,3 @@ const rank = (hand:Card[], board:Card[]):HandRank => {
     
     return handRank
 }
-
-export default rank
