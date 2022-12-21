@@ -1,6 +1,6 @@
 import { Card, HandRank } from '../types'
 
-const rank = (hand:Card[], board:Card[]):HandRank => {
+export const rank = (hand:Card[], board:Card[]):HandRank => {
       
     const nums = (cards:Card[]) => {
         const nums:number[] = []
@@ -198,5 +198,3 @@ const rank = (hand:Card[], board:Card[]):HandRank => {
     
     return handRank
 }
-
-export default rank
