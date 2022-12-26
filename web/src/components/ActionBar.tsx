@@ -103,8 +103,8 @@ export const ActionBar = () => {
     setBet({...bet, player:bet.player+game.stack})
   }
 
-  const villanCheck = (newGame: Game) => {
-    setGame({...newGame, pot:bet.player+bet.villan, turn:"player"})
+  const villanCheck = () => {
+    setGame({...game, turn:"player"})
     ChangeRound()
   }
 
@@ -112,8 +112,8 @@ export const ActionBar = () => {
     preflop()
   }
 
-  const villanCall = (newGame: Game) => {
-    setGame({...newGame, pot:game.pot-bet.villan+bet.player, turn:"player"})
+  const villanCall = () => {
+    setGame({...game, pot:game.pot-bet.villan+bet.player, turn:"player"})
     ChangeRound()
   }
 
