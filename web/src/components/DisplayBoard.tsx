@@ -68,32 +68,32 @@ export const DisplayBoard = (board:Card[]) => {
 
   if (game.round==="flop") {
     return (
-      <p> 
+      <span> 
         <img src = {image[board[0].suit as key][board[0].number-2]} alt="flop1"/>
         <img src = {image[board[1].suit as key][board[1].number-2]} alt="flop2"/>
         <img src = {image[board[2].suit as key][board[2].number-2]} alt="flop3"/>
-      </p> 
+      </span> 
     )
   } else if (game.round==="turn") {
     return (
-      <p> 
+      <span> 
         <img src = {image[board[0].suit as key][board[0].number-2]} alt="flop1"/>
         <img src = {image[board[1].suit as key][board[1].number-2]} alt="flop2"/>
         <img src = {image[board[2].suit as key][board[2].number-2]} alt="flop3"/>
         <img src = {image[board[3].suit as key][board[3].number-2]} alt="turn"/> 
-      </p> 
+      </span> 
     )
   } else if (["river","showdown"].includes(game.round)) {
     return (
-      <p>       
+      <span>       
         <img src = {image[board[0].suit as key][board[0].number-2]} alt="flop1"/>
         <img src = {image[board[1].suit as key][board[1].number-2]} alt="flop2"/>
         <img src = {image[board[2].suit as key][board[2].number-2]} alt="flop3"/>
         <img src = {image[board[3].suit as key][board[3].number-2]} alt="turn"/> 
         <img src = {image[board[4].suit as key][board[4].number-2]} alt="river"/>
-      </p>
+      </span>
     )
   } else {
-    return <div style={{height:145}}></div>
+    return <div style={{height:20}}></div>
   }
 }

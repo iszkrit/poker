@@ -1,10 +1,11 @@
-.App {
+/* .App {
   align-items: center;
-}
-
-.pokertable {
+} */
+.poker {
   background-image: url('./assets/pokertable.jpg');
   background-size: cover;
+}
+.pokertable {
   min-height: 100vh;
   display: flex;
   text-align: center;

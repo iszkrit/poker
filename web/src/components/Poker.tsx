@@ -1,44 +1,47 @@
 import { useRecoilValue } from 'recoil'
 import { pileAtom, gameAtom, judgeAtom } from '../states/Atoms'
 import { ActionBar, DisplayHand, DisplayBoard } from '../components/index' 
+import Chip from '@mui/material/Chip';
 
 export const Poker = () => {
   const pile = useRecoilValue(pileAtom)
   const judge = useRecoilValue(judgeAtom)
-  const game = useRecoilValue(gameAtom)
-
-  const ShowDown = () => {
-    return game.round==="showdown"? <h4>Winner : {judge?.winner} </h4> : <h2>Winner : ??</h2>
+  const { stack, round, pot } = useRecoilValue(gameAtom)
+  const showGame = (round==="default")? "hidden":"visible"
+  const showButton = (round!=="default")? "hidden":"visible"
+  const start = () => {
   }
 
   return (
     <div className="poker">
-      <header className="pokertable">
+      <div className ="startButton" style={{visibility: showButton, alignItems:'center'}}>
+        <button>
+          Game Start
+        </button>
+      </div>
 
-        <div className="villanHand" style={{marginTop:180}}> 
-          <p style={{fontSize:15}}>
-            {game.round!=="showdown"?
-              DisplayHand([{suit:"b", number:2}, {suit:"b", number:2}])
-              :
-              DisplayHand(pile.slice(2,4))
-            } Villan's Hand{game.round==="showdown"? `:(${judge.villanHand})` : ""}
-          </p>
+      <div className="pokertable" >
+        <div className="villanHand" style={{marginTop:150,fontSize:15}}> 
+          {round!=="showdown"?
+            DisplayHand([{suit:"b", number:2}, {suit:"b", number:2}])
+            :
+            DisplayHand(pile.slice(2,4))
+          } Villan's Hand{round==="showdown"? `:(${judge.villanHand})` : ""}
         </div>
 
-        <div className="board">
+        <div className="board" style={{textAlign:'center'}}>
+          <Chip label={round==="showdown"? `${judge.winner} Pot:${pot}` : `Pot:${pot}`}/>
           {DisplayBoard(pile.slice(4,9))}
-          {/* <p>Pot : {game.pot}</p> */}
+          <Chip label={round}/>
         </div>
-        <div className="playerHand"> 
-          <p style={{fontSize:15}}>
-          Your Hand{game.round==="showdown"? `:(${judge.playerHand})` : ""}
+
+        <div className="playerHand" style={{fontSize:15}}> 
+          Your Hand{round==="showdown"? `:(${judge.playerHand})` : ""}
           {DisplayHand(pile.slice(0,2))} 
-          </p> 
         </div>
-        {/* {ShowDown()} */}
-        {/* <h2>You {game.stack} / villan {1000-game.stack}</h2> */}
         <ActionBar/>
-      </header>
+        You have {stack} chips / Villan has {1000-stack-pot} chips
+      </div>
     </div>
   );
 }

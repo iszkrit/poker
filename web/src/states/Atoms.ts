@@ -50,7 +50,7 @@ export const gameAtom = atom<Game>({
     turn:"player", 
     pot:0, 
     stack:500, 
-    bb:10
+    bb:20
   },
 })
 
