@@ -64,9 +64,9 @@ const image = {
 export const DisplayHand = (hand:Card[]) => {
   type key = keyof typeof image
   return (
-    <div>       
+    <p>       
       <img src = {image[hand[0].suit as key][hand[0].number-2]} alt="hand1"/>
       <img src = {image[hand[1].suit as key][hand[1].number-2]} alt="hand2"/>
-    </div>
+    </p>
   )
 }

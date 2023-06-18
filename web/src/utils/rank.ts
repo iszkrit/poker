@@ -195,6 +195,5 @@ export const rank = (hand:Card[], board:Card[]):HandRank => {
     isFlash(allCards)
     isStraight(n)
     hasPair(n)
-    
     return handRank
 }
