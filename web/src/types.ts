@@ -1,9 +1,6 @@
 export type Game = {
-  round: string,
+  round: number,
   turn: string,
-  pot: number,
-  stack: number,
-  bb: number
 }
 
 export type Card = {
@@ -17,9 +14,10 @@ export type Judge = {
   villanHand : string
 }
 
-export type Bet = {
-  player : number,
-  villan : number
+export type ChipInfo = {
+  playerStack : number,
+  playerBet : number,
+  villanBet : number
 }
 
 export interface HandRank {

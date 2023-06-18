@@ -1,6 +1,4 @@
 import { Card } from '../types'
-import { useRecoilValue } from 'recoil';
-import { gameAtom } from '../states/Atoms' 
 import b2 from '../assets/trumpImage/b2.png'
 import s2 from '../assets/trumpImage/s2.png'
 import s3 from '../assets/trumpImage/s3.png'
@@ -62,11 +60,10 @@ const image = {
   h : [h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14],
   d : [d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13,d14]
 }
-export const DisplayBoard = (board:Card[]) => {
-  const game = useRecoilValue(gameAtom)
+export const DisplayBoard = (board:Card[], round:number) => {
   type key = keyof typeof image
 
-  if (game.round==="flop") {
+  if (round===1) {
     return (
       <span> 
         <img src = {image[board[0].suit as key][board[0].number-2]} alt="flop1"/>
@@ -74,7 +71,7 @@ export const DisplayBoard = (board:Card[]) => {
         <img src = {image[board[2].suit as key][board[2].number-2]} alt="flop3"/>
       </span> 
     )
-  } else if (game.round==="turn") {
+  } else if (round===2) {
     return (
       <span> 
         <img src = {image[board[0].suit as key][board[0].number-2]} alt="flop1"/>
@@ -83,7 +80,7 @@ export const DisplayBoard = (board:Card[]) => {
         <img src = {image[board[3].suit as key][board[3].number-2]} alt="turn"/> 
       </span> 
     )
-  } else if (["river","showdown"].includes(game.round)) {
+  } else if ([3,4, 5].includes(round)) {
     return (
       <span>       
         <img src = {image[board[0].suit as key][board[0].number-2]} alt="flop1"/>

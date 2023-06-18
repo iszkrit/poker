@@ -21,6 +21,7 @@ export const handJudge = (player:Card[], villan:Card[], board:Card[]):Judge => {
 
     const st1 = strength(hr1)
     const st2 = strength(hr2)
+
     const judge:Judge = {
         winner : "",
         playerHand : st1.rank,
